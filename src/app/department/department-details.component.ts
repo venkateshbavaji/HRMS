@@ -16,7 +16,6 @@ export class DepartmentDetailsComponent implements OnInit {
         this.deptService.getById(id)
             .subscribe(response => {
                 this.departmentModel = response;
-                console.log('121');
             })
     }
 

@@ -35,14 +35,12 @@ export class DepartmentComponent implements OnInit {
   loadData() {
     this.deptService.getAll()
       .subscribe(response => {
-        console.log(response);
         this.lstDepartment = response.map((data) => {
           return {
             id: data.payload.doc.id,
             ...data.payload.doc.data() as DepartmentModel
           }
         });
-        console.log(this.lstDepartment);
       })
   }
   addDepartment() {
@@ -57,11 +55,9 @@ export class DepartmentComponent implements OnInit {
     if (confirm('Are you sure you want to delete')) {
       this.deptService.delete(id)
         .then(response => {
-          console.log(response);
           this.toasterService.success("Delete successfully...")
         })
         .catch((error: Response) => {
-          console.log(error);
           this.toasterService.error(error.statusText);
         })
       this.loadData();
@@ -71,11 +67,9 @@ export class DepartmentComponent implements OnInit {
     if (this.departmentModel.id) {
       this.deptService.update(this.departmentModel.id, this.departmentModel)
         .then(response => {
-          console.log(response);
           this.toasterService.success("Update successfully....");
         })
         .catch((error: Response) => {
-          console.log(error);
           this.toasterService.error(error.statusText);
         })
     }
