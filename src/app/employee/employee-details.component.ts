@@ -13,7 +13,7 @@ export class EmployeeDetailsComponent implements OnInit {
     constructor(private activatedRoute: ActivatedRoute, private employeeService: EmployeeService) { }
 
     ngOnInit(): void {
-        let departmentId = this.activatedRoute.snapshot.paramMap.get('departmentId');
+        let departmentId = this.activatedRoute.snapshot.paramMap.get('employeeId');
         this.employeeService.getById(departmentId)
             .subscribe(response => {
                 this.employeeModel = response;

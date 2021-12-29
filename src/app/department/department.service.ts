@@ -12,7 +12,6 @@ export class DepartmentService {
         return this.fireStore.collection('department').snapshotChanges();
     }
     getById(deptId: string) {
-        console.log(deptId);
         return this.fireStore.doc<DepartmentModel>('department/' + deptId).valueChanges();
     }
     create(departmentModel: DepartmentModel) {

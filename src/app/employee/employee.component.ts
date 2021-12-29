@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { DepartmentService } from '../department/department.service';
 import { EmployeeModel } from './employee.model';
 import { EmployeeService } from './employee.service';
 
@@ -51,7 +52,7 @@ export class EmployeeComponent implements OnInit {
     return this.employeeForm.get('role');
   }
 
-  constructor(private employeeService: EmployeeService, private toasterService: ToastrService) {
+  constructor(private employeeService: EmployeeService, private toasterService: ToastrService, private deptService: DepartmentService) {
 
   }
   ngOnInit(): void {
@@ -60,15 +61,26 @@ export class EmployeeComponent implements OnInit {
   loadData() {
     this.employeeService.getAll()
       .subscribe(response => {
-        console.log(response);
         this.lstEmployee = response.map((data) => {
           return {
-            id: data.payload.doc.id,
+            employeeId: data.payload.doc.id,
             ...data.payload.doc.data() as EmployeeModel
           }
         });
-        console.log(this.lstEmployee);
+        this.lstEmployee.forEach(element => {
+          if (element.departmentId) {
+            this.deptService.getById(element.departmentId)
+              .subscribe(response => element.department = response ? response.name : '');
+          }
+          if (element.reportingPersonId) {
+            this.employeeService.getById(element.reportingPersonId)
+              .subscribe(response => {
+                element.reportingPerson = response ? response.fullName : '';
+              })
+          }
+        });
       })
+
   }
   addEmployee() {
     this.title = "Add Employee";
@@ -80,6 +92,7 @@ export class EmployeeComponent implements OnInit {
   }
   deleteEmployee(departmentId: string) {
     if (confirm('Are you sure you want to delete')) {
+      console.log(departmentId)
       this.employeeService.delete(departmentId)
         .then(response => {
           console.log(response);

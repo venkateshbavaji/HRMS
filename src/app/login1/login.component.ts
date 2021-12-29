@@ -35,7 +35,7 @@ export class LoginComponent {
       .subscribe(response => {
         lstEmployee = response.map((data) => {
           return {
-            id: data.payload.doc.id,
+            employeeId: data.payload.doc.id,
             ...data.payload.doc.data() as EmployeeModel
           }
         });

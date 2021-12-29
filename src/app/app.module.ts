@@ -13,13 +13,15 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { LoginComponent } from './login1/login.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    NavBarComponent
+    NavBarComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,7 @@ import { LoginComponent } from './login1/login.component';
     CommonModule,
     NgxPaginationModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot({ positionClass: 'toast-top-center', timeOut: 3000 }),
+    ToastrModule.forRoot({ positionClass: 'toast-bottom-right', timeOut: 3000 }),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule
   ],

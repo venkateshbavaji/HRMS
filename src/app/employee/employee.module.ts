@@ -9,7 +9,7 @@ import { EmployeeService } from "./employee.service";
 const routes: Route[] = [
 
     {
-        path: ':departmentId',
+        path: ':employeeId',
         component: EmployeeDetailsComponent
     },
     {

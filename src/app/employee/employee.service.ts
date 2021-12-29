@@ -10,17 +10,16 @@ export class EmployeeService {
     getAll() {
         return this.fireStore.collection('employee').snapshotChanges();
     }
-    getById(departmentId: string) {
-        console.log(departmentId);
-        return this.fireStore.doc<EmployeeModel>('employee/' + departmentId).valueChanges();
+    getById(empId: string) {
+        return this.fireStore.doc<EmployeeModel>('employee/' + empId).valueChanges();
     }
     create(employeeModel: EmployeeModel) {
         return this.fireStore.collection('employee').add({ ...employeeModel });
     }
-    update(departmentId: string, employeeModel: EmployeeModel) {
-        return this.fireStore.doc('employee/' + departmentId).update({ ...employeeModel });
+    update(empId: string, employeeModel: EmployeeModel) {
+        return this.fireStore.doc('employee/' + empId).update({ ...employeeModel });
     }
-    delete(departmentId: string) {
-        return this.fireStore.doc('employee/' + departmentId).delete();
+    delete(empId: string) {
+        return this.fireStore.doc('employee/' + empId).delete();
     }
 }

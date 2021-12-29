@@ -8,6 +8,7 @@ import { HomeModule } from './home/home.module';
 import { LeaveModule } from './leave/leave.module';
 import { LeaverequestModule } from './leaverequest/leaverequest.module';
 import { LoginComponent } from './login1/login.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Route[] = [
   {
@@ -17,6 +18,10 @@ const routes: Route[] = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent
   },
   {
     path: 'home',
