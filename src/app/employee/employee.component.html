@@ -1,0 +1,127 @@
+<div class="card componentStyle">
+    <div style="text-align: right;margin-bottom: 5px;">
+        <a data-bs-toggle="modal" (click)="addEmployee()" data-bs-target="#mpEmployee" class="btn btn-primary">
+            <i class="fas fa-plus"></i>ADD
+        </a>
+    </div>
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>DepartmentId</th>
+                <th>EmailAddress</th>
+                <th>FirstName</th>
+                <th>FullName</th>
+                <th>LastName</th>
+                <th>Password</th>
+                <th>ReportingPersonId</th>
+                <th>Role</th>
+                <th>Action(s)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let employee of lstEmployee">
+                <td>{{employee.departmentId}}</td>
+                <td>{{employee.emailAddress}}</td>
+                <td>{{employee.firstName}}</td>
+                <td>{{employee.fullName}}</td>
+                <td>{{employee.lastName}}</td>
+                <td>{{employee.password}}</td>
+                <td>{{employee.reportingPersonId}}</td>
+                <td>{{employee.role}}</td>
+                <td>
+                    <a [routerLink]="['/employee',employee.departmentId]" class="btn btn-info"><i
+                            class="fas fa-eye"></i></a>&nbsp;
+                    <a (click)="editEmployee(employee)" data-bs-toggle="modal" data-bs-target="#mpEmployee"
+                        class="btn btn-secondary"><i class="fas fa-pen-square"></i></a>&nbsp;
+                    <a (click)="deleteEmployee(employee.departmentId)" class="btn btn-danger"><i
+                            class="fas fa-trash"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="modal fade" id="mpEmployee" tabindex="-1" aria-labelledby="mpEmployeeTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mpEmployeeTitle">{{title}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="employeeForm">
+                        <div class="form-group">
+                            <label for="departmentId" class="col-form-label">DepartmentId:</label>
+                            <input [(ngModel)]="employeeModel.departmentId" formControlName="departmentId"
+                                name="departmentId" class="form-control" id="departmentId">
+                            <div class="alert alert-danger" *ngIf="departmentId.touched && departmentId.invalid">
+                                * Department Id required
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="txtemailAddress" class="col-form-label">EmailAddress:</label>
+                            <input [(ngModel)]="employeeModel.emailAddress" formControlName="emailAddress"
+                                name="txtemailAddress" class="form-control" id="txtemailAddress">
+                            <div class="alert alert-danger" *ngIf="emailAddress.touched && emailAddress.invalid">
+                                * Email Address required
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtFirstName" class="col-form-label">FirstName:</label>
+                            <input [(ngModel)]="employeeModel.firstName" formControlName="firstName"
+                                class="form-control">
+                            <div class="alert alert-danger" *ngIf="firstName.touched && firstName.invalid">
+                                * First Name required
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtFullName" class="col-form-label">FullName:</label>
+                            <input [(ngModel)]="employeeModel.fullName" formControlName="fullName" class="form-control"
+                                id="txtFullName">
+                            <div class="alert alert-danger" *ngIf="fullName.touched && fullName.invalid">
+                                * full Name required
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtLastName" class="col-form-label">LastName:</label>
+                            <input [(ngModel)]="employeeModel.lastName" name="txtLastName" class="form-control"
+                                id="txtLastName" formControlName="lastName">
+                            <div class="alert alert-danger" *ngIf="lastName.touched && lastName.invalid">
+                                * last Name required
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtPassword" class="col-form-label"> Password:</label>
+                            <input [(ngModel)]="employeeModel.password" formControlName="password" name="txtPassword"
+                                class="form-control" id="txtPassword">
+                            <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
+                                * Password required
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtReportingPersonId" class="col-form-label">ReportingPersonId:</label>
+                            <input [(ngModel)]="employeeModel.reportingPersonId" formControlName="reportingPersonId"
+                                name="txtReportingPersonId" class="form-control" id="txtReportingPersonId">
+                            <div class="alert alert-danger"
+                                *ngIf="reportingPersonId.touched && reportingPersonId.invalid">
+                                * Reporting Person Id required
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtRole" class="col-form-label">Role:</label>
+                            <input [(ngModel)]="employeeModel.role" formControlName="role" name="txtRole"
+                                class="form-control" id="txtRole">
+                            <div class="alert alert-danger" *ngIf="role.touched && role.invalid">
+                                * Role required
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" (click)="saveEmployee()" class="btn btn-primary"
+                        data-bs-dismiss="modal">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

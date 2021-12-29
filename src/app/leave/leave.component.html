@@ -1,0 +1,133 @@
+<div class="card componentStyle">
+    <div style="text-align: right;margin-bottom: 5px;">
+        <a data-bs-toggle="modal" (click)="addLeave()" data-bs-target="#mpLeave" class="btn btn-primary">
+            <i class="fas fa-plus"></i>ADD
+        </a>
+    </div>
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>#LeaveId</th>
+                <th>Description</th>
+                <th>From Date</th>
+                <th>NoOfDays</th>
+                <th> Reason</th>
+                <th>ReportingPersonId</th>
+                <th>Status</th>
+                <th>To Date</th>
+                <th>UserId</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let leave of lstLeave">
+                <td>{{leave.leaveId}}</td>
+                <td>{{leave.description}}</td>
+                <td>{{leave.fromDate}}</td>
+                <td>{{leave.noOfDays}}</td>
+                <td>{{leave.reason}}</td>
+                <td>{{leave.reportingPersonId}}</td>
+                <td>{{leave.status}}</td>
+                <td>{{leave.toDate}}</td>
+                <td>{{leave.userId}}</td>
+                <td>
+                    <a [routerLink]="['/leave',leave.leaveId]" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                    &nbsp;
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="modal fade" id="mpLeave" tabindex="-1" aria-labelledby="mpLeaveTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mpLeaveTitle">{{title}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="leaveForm">
+                        <div class="form-group">
+                            <label for="txtLeaveId" class="col-form-label">LeaveId:</label>
+                            <input [(ngModel)]="leaveModel.leaveId" name="txtLeaveId" formControlName="leaveId"
+                                class="form-control" id="txtLeaveId">
+                            <div class="alert alert-danger" *ngIf="leaveId.touched && leaveId.invalid">
+                                * Leave id required
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtDescription" class="col-form-label">Description:</label>
+                            <input [(ngModel)]="leaveModel.description" formControlName="description"
+                                name="txtDescription" class="form-control" id="txtDescription">
+                            <div class="alert alert-danger" *ngIf="description.touched && description.invalid">
+                                *Description required
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtFromDate" class="col-form-label">FromDate:</label>
+                            <input [(ngModel)]="leaveModel.fromDate" formControlName="fromDate" name="txtFromDate"
+                                class="form-control" id="txtFromDate">
+                            <div class="alert alert-danger" *ngIf="fromDate.touched && fromDate.invalid">
+                                * from date required
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtNoOfDays" class="col-form-label">NoOfDays:</label>
+                            <input [(ngModel)]="leaveModel.noOfDays" name="txtNoOfDays" formControlName="noOfDays"
+                                class="form-control" id="txtNoOfDays">
+                            <div class="alert alert-danger" *ngIf="noOfDays.touched && noOfDays.invalid">
+                                * No of days required
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtReason" class="col-form-label">Reason:</label>
+                            <input [(ngModel)]="leaveModel.reason" name="txtReason" formControlName="reason"
+                                class="form-control" id="txtReason">
+                            <div class="alert alert-danger" *ngIf="reason.touched && reason.invalid">
+                                * Reason required
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtReportingPersonId" class="col-form-label">ReportingPersonId:</label>
+                            <input [(ngModel)]="leaveModel.reportingPersonId" name="txtReportingPersonId"
+                                class="form-control" id="txtReportingPersonId" formControlName="reportingPersonId">
+                            <div class="alert alert-danger"
+                                *ngIf="reportingPersonId.touched && reportingPersonId.invalid">
+                                * Reporting Person Id required
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtStatus" class="col-form-label">Status:</label>
+                            <input [(ngModel)]="leaveModel.status" name="txtStatus" formControlName="status"
+                                class="form-control" id="txtStatus">
+                            <div class="alert alert-danger" *ngIf="status.touched && status.invalid">
+                                * Status required
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtToDate" class="col-form-label">ToDate:</label>
+                            <input [(ngModel)]="leaveModel.toDate" name="txtToDate" formControlName="toDate"
+                                class="form-control" id="txtToDate">
+                            <div class="alert alert-danger" *ngIf="toDate.touched && toDate.invalid">
+                                *To date required
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtUserId" class="col-form-label">UserId:</label>
+                            <input [(ngModel)]="leaveModel.userId" formControlName="userId" name="txtUserId"
+                                class="form-control" id="txtUserId">
+                            <div class="alert alert-danger" *ngIf="userId.touched && userId.invalid">
+                                * User Id required
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" (click)="saveLeave()" class="btn btn-primary"
+                        data-bs-dismiss="modal">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
