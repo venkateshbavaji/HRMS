@@ -1,4 +1,4 @@
-<h1 style="text-align: center;color:red;">Human Resource Management System</h1>
+<h1 style="text-align: center;color:cornsilk;">Human Resource Management System</h1>
 
 <div class="container">
     <nav [ngClass]="{'showNavBar': IsLoggedIn, 'hideNavBar' : IsLoggedIn === false }"
@@ -14,6 +14,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li *ngIf="Role!='employee' && Role!='manager'" class="nav-item">
+                        <a class="nav-link" routerLink='/home' routerLinkActive='active'>Home</a>
+                    </li>
                     <li *ngIf="Role!='employee' && Role!='manager'" class="nav-item">
                         <a class="nav-link" routerLink='/department' routerLinkActive='active'>Department</a>
                     </li>
@@ -34,7 +37,7 @@
                     </li>
                     <li class="nav-item">
                         <a style="cursor: pointer;" class="nav-link" (click)="logout()"><button
-                                class="btn btn-warning">Logout</button></a>
+                                class="btn btn-light">Logout</button></a>
                     </li>
 
                 </ul>
