@@ -14,11 +14,14 @@ export class LeaveComponent implements OnInit {
   title = "Add Leave";
   leaveForm = new FormGroup({
     leaveId: new FormControl('', Validators.required),
+    department: new FormControl('', Validators.required),
+    employeeName: new FormControl('', Validators.required),
+    emailId: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
     fromDate: new FormControl('', Validators.required),
     noOfDays: new FormControl('', Validators.required),
     reason: new FormControl('', Validators.required),
-    reportingPersonId: new FormControl('', Validators.required),
+    reportingPerson: new FormControl('', Validators.required),
     status: new FormControl('', Validators.required),
     toDate: new FormControl('', Validators.required),
     userId: new FormControl('', Validators.required),
@@ -26,6 +29,15 @@ export class LeaveComponent implements OnInit {
   toasterService: any;
   get leaveId() {
     return this.leaveForm.get('leaveId');
+  }
+  get department() {
+    return this.leaveForm.get('department');
+  }
+  get employeeName() {
+    return this.leaveForm.get('employeeName');
+  }
+  get emailId() {
+    return this.leaveForm.get('emailId');
   }
   get description() {
     return this.leaveForm.get('description');
@@ -39,8 +51,8 @@ export class LeaveComponent implements OnInit {
   get reason() {
     return this.leaveForm.get('reason');
   }
-  get reportingPersonId() {
-    return this.leaveForm.get('reportingPersonId');
+  get reportingPerson() {
+    return this.leaveForm.get('reportingPerson');
   }
   get status() {
     return this.leaveForm.get('status');
@@ -66,10 +78,22 @@ export class LeaveComponent implements OnInit {
             ...data.payload.doc.data() as LeaveModel
           }
         });
+        this.lstLeave.forEach(element => {
+          if (element.leaveId) {
+            this.leaveService.getById(element.leaveId)
+              .subscribe(response => element.department = response ? response.employeeName : '');
+          }
+          if (element.reportingPerson) {
+            this.leaveService.getById(element.reportingPerson)
+              .subscribe(response => {
+                element.reportingPerson = response ? response.employeeName : '';
+              })
+          }
+        });
         let employeeId = localStorage.getItem('employeeId');
         let role = localStorage.getItem('role');
         if (role === 'manager') {
-          this.lstLeave = this.lstLeave.filter(x => x.reportingPersonId === employeeId);
+          this.lstLeave = this.lstLeave.filter(x => x.reportingPerson === employeeId);
         }
         console.log(this.lstLeave);
       })
@@ -78,24 +102,19 @@ export class LeaveComponent implements OnInit {
     this.title = "Add Leave";
     this.leaveModel = new LeaveModel();
   }
-  /*  editLeave(leaveModel: LeaveModel) {
-     this.title = "Edit Leave";
-     this.leaveModel = leaveModel;
-   }
-   deleteLeave(id: string) {
-     if (confirm('Are you sure you want to delete')) {
-       this.leaveService.delete(id)
-         .then(response => {
-           console.log(response);
-           this.toasterService.success("Delete successfully...")
-         })
-         .catch((error: Response) => {
-           console.log(error);
-           this.toasterService.error(error.statusText);
-         })
-       this.loadData();
-     }
-   } */
+
+  days() {
+    //alert("hi");
+    /*  var date1 = document.getElementById("txtFromDate").value;
+     var date2 = document.getElementById("txtToDate").value;
+     var date3 = new Date(date1);
+     var date4 = new Date(date2);
+     var date_change = date4.getTime() - date3.getTime();
+     var days = date_change / (1000 * 60 * 60 * 24);
+     return document.getElementById("txtNoOfDays").value = days; */
+
+  }
+
   saveLeave() {
     if (this.leaveModel.leaveId) {
       this.leaveService.update(this.leaveModel.leaveId, this.leaveModel)
@@ -109,7 +128,7 @@ export class LeaveComponent implements OnInit {
         })
     }
     else {
-      this.leaveModel.reportingPersonId = localStorage.getItem('reportingPersonId');
+      this.leaveModel.reportingPerson = localStorage.getItem('reportingPersonId');
       this.leaveModel.status = 'Pending';
       this.leaveModel.userId = localStorage.getItem('userId');
       this.leaveService.create(this.leaveModel)

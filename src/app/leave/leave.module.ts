@@ -2,21 +2,22 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Route, RouterModule } from "@angular/router";
+import { LeaveDetailsComponent } from "./leave-details.component";
 import { LeaveComponent } from "./leave.component";
 import { LeaveService } from "./leave.service";
 
 const routes: Route[] = [
     {
-        path: '',
-        component: LeaveComponent
+        path: ':leaveId',
+        component: LeaveDetailsComponent
     },
     {
-        path: 'leave',
+        path: '',
         component: LeaveComponent
     }
 ]
 @NgModule({
-    declarations: [LeaveComponent],
+    declarations: [LeaveComponent, LeaveDetailsComponent],
     imports: [
         FormsModule,
         CommonModule,

@@ -30,7 +30,7 @@ export class LeaveRequestComponent implements OnInit {
         let employeeId = localStorage.getItem('employeeId');
         let role = localStorage.getItem('role');
         if (role === 'manager') {
-          this.lstLeave = this.lstLeave.filter(x => x.reportingPersonId === employeeId);
+          this.lstLeave = this.lstLeave.filter(x => x.reportingPerson === employeeId);
         }
         console.log(this.lstLeave);
       })
