@@ -43,15 +43,6 @@
                 <div class="modal-body">
                     <form [formGroup]="employeeForm">
                         <div class="form-group">
-                            <label for="departmentId" class="col-form-label">DepartmentId:</label>
-                            <input [(ngModel)]="employeeModel.departmentId" formControlName="departmentId"
-                                name="departmentId" class="form-control" id="departmentId">
-                            <div class="alert alert-danger" *ngIf="departmentId.touched && departmentId.invalid">
-                                * Department Id required
-                            </div>
-
-                        </div>
-                        <div class="form-group">
                             <label for="txtemailAddress" class="col-form-label">EmailAddress:</label>
                             <input [(ngModel)]="employeeModel.emailAddress" formControlName="emailAddress"
                                 name="txtemailAddress" class="form-control" id="txtemailAddress">
@@ -67,20 +58,21 @@
                                 * First Name required
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="txtFullName" class="col-form-label">FullName:</label>
-                            <input [(ngModel)]="employeeModel.fullName" formControlName="fullName" class="form-control"
-                                id="txtFullName">
-                            <div class="alert alert-danger" *ngIf="fullName.touched && fullName.invalid">
-                                * full Name required
-                            </div>
-                        </div>
+
                         <div class="form-group">
                             <label for="txtLastName" class="col-form-label">LastName:</label>
                             <input [(ngModel)]="employeeModel.lastName" name="txtLastName" class="form-control"
                                 id="txtLastName" formControlName="lastName">
                             <div class="alert alert-danger" *ngIf="lastName.touched && lastName.invalid">
                                 * last Name required
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtFullName" class="col-form-label">FullName:</label>
+                            <input [(ngModel)]="employeeModel.fullName" formControlName="fullName" class="form-control"
+                                id="txtFullName">
+                            <div class="alert alert-danger" *ngIf="fullName.touched && fullName.invalid">
+                                * full Name required
                             </div>
                         </div>
                         <div class="form-group">
@@ -92,21 +84,20 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="txtReportingPersonId" class="col-form-label">ReportingPersonId:</label>
-                            <input [(ngModel)]="employeeModel.reportingPersonId" formControlName="reportingPersonId"
-                                name="txtReportingPersonId" class="form-control" id="txtReportingPersonId">
-                            <div class="alert alert-danger"
-                                *ngIf="reportingPersonId.touched && reportingPersonId.invalid">
-                                * Reporting Person Id required
-                            </div>
+                            <label for="txtRole" class="col-form-label">Role:</label>
+                            <select>
+                                <option>Employee</option>
+                                <option>Manager</option>
+                                <option>Hr-admin</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="txtRole" class="col-form-label">Role:</label>
-                            <input [(ngModel)]="employeeModel.role" formControlName="role" name="txtRole"
-                                class="form-control" id="txtRole">
-                            <div class="alert alert-danger" *ngIf="role.touched && role.invalid">
-                                * Role required
-                            </div>
+                            <label for="txtReportingPerson" class="col-form-label">ReportingPerson:</label>
+                            <select>
+                                <option>Employee</option>
+                                <option>Manager</option>
+                                <option>Hr-admin</option>
+                            </select>
                         </div>
                     </form>
                 </div>

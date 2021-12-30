@@ -21,19 +21,4 @@ export class EmployeeDetailsComponent implements OnInit {
             })
     }
 
-
-
-    /* departmentModel = new DepartmentModel();
-    constructor(private activatedRoute: ActivatedRoute, private deptService: DepartmentService) { }
-
-    ngOnInit(): void {
-        let id = this.activatedRoute.snapshot.paramMap.get('id');
-        this.deptService.getById(id)
-            .subscribe(response => {
-                this.departmentModel = response;
-                console.log('121');
-            })
-    } */
-
-
 }

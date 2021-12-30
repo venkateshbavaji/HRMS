@@ -24,7 +24,7 @@ export class EmployeeComponent implements OnInit {
     fullName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
-    reportingPersonId: new FormControl('', Validators.required),
+    reportingPerson: new FormControl('', Validators.required),
     role: new FormControl('', Validators.required)
   })
   get departmentId() {
@@ -45,8 +45,8 @@ export class EmployeeComponent implements OnInit {
   get password() {
     return this.employeeForm.get('password');
   }
-  get reportingPersonId() {
-    return this.employeeForm.get('reportingPersonId');
+  get reportingPerson() {
+    return this.employeeForm.get('reportingPerson');
   }
   get role() {
     return this.employeeForm.get('role');
@@ -88,7 +88,7 @@ export class EmployeeComponent implements OnInit {
   }
   editEmployee(employeeModel: EmployeeModel) {
     this.title = "Edit Employee";
-    this.employeeModel = new EmployeeModel;
+    this.employeeModel = employeeModel;
   }
   deleteEmployee(departmentId: string) {
     if (confirm('Are you sure you want to delete')) {

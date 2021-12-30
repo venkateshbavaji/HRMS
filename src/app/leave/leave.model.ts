@@ -1,14 +1,14 @@
 export class LeaveModel {
     leaveId: string;
-    emailId: string;
     employeeName: string;
     department: string;
-    description: string;
-    fromDate: string;
-    noOfDays: number;
+    emailId: string;
     reason: string;
-    reportingPersonId: string;
-    status: string;
+    fromDate: string;
     toDate: string;
+    noOfDays: number;
+    reportingPerson: string;
+    status: string;
+    description: string;
     userId: string;
 }

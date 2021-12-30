@@ -8,9 +8,25 @@
                 <table>
                     <tr>
                         <td style="text-align: right;width: 50%;padding: 5px;">
-                            Full Name :
+                            First Name :
                         </td>
                         <td style="font-weight: bold;text-align: left;width: 50%;padding: 5px;">
+                            {{employee.firstName}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;width: 50%;padding: 5px;">
+                            Last Name :
+                        </td>
+                        <td style="font-weight: bold;text-align: left;width: 50%;padding: 5px">
+                            {{employee.lastName}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;width: 50%;padding: 5px;">
+                            Full Name :
+                        </td>
+                        <td style="font-weight: bold;text-align: left;width: 50%;padding: 5px">
                             {{employee.fullName}}
                         </td>
                     </tr>
@@ -20,6 +36,14 @@
                         </td>
                         <td style="font-weight: bold;text-align: left;width: 50%;padding: 5px">
                             {{employee.emailAddress}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;width: 50%;padding: 5px;">
+                            Password :
+                        </td>
+                        <td style="font-weight: bold;text-align: left;width: 50%;padding: 5px">
+                            {{employee.password}}
                         </td>
                     </tr>
                 </table>
