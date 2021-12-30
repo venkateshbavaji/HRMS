@@ -91,10 +91,7 @@ export class LeaveComponent implements OnInit {
           }
         });
         let employeeId = localStorage.getItem('employeeId');
-        let role = localStorage.getItem('role');
-        if (role === 'manager') {
-          this.lstLeave = this.lstLeave.filter(x => x.reportingPerson === employeeId);
-        }
+        this.lstLeave = this.lstLeave.filter(x => x.employeeId === employeeId);
         console.log(this.lstLeave);
       })
   }
@@ -116,31 +113,19 @@ export class LeaveComponent implements OnInit {
   }
 
   saveLeave() {
-    if (this.leaveModel.leaveId) {
-      this.leaveService.update(this.leaveModel.leaveId, this.leaveModel)
-        .then(response => {
-          console.log(response);
-          this.toasterService.success("Update successfully....");
-        })
-        .catch((error: Response) => {
-          console.log(error);
-          this.toasterService.error(error.statusText);
-        })
-    }
-    else {
-      this.leaveModel.reportingPerson = localStorage.getItem('reportingPersonId');
-      this.leaveModel.status = 'Pending';
-      this.leaveModel.userId = localStorage.getItem('userId');
-      this.leaveService.create(this.leaveModel)
-        .then(response => {
-          console.log(response);
-          this.toasterService.success("Created successfully....")
-        })
-        .catch((error: Response) => {
-          console.log(error);
-          this.toasterService.error(error.statusText);
-        })
-    }
+    this.leaveModel.reportingPersonId = localStorage.getItem('reportingPersonId');
+    this.leaveModel.departmentId = localStorage.getItem('departmentId');
+    this.leaveModel.status = 'Pending';
+    this.leaveModel.employeeId = localStorage.getItem('employeeId');
+    this.leaveService.create(this.leaveModel)
+      .then(response => {
+        console.log(response);
+        this.toasterService.success("Created successfully....")
+      })
+      .catch((error: Response) => {
+        console.log(error);
+        this.toasterService.error(error.statusText);
+      })
     this.leaveModel = new LeaveModel();
     this.loadData();
   }

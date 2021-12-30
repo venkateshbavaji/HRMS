@@ -1,5 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
+import { DepartmentService } from '../department/department.service';
+import { EmployeeService } from '../employee/employee.service';
 import { LeaveModel } from '../leave/leave.model';
 import { LeaveService } from '../leave/leave.service';
 
@@ -11,7 +13,11 @@ import { LeaveService } from '../leave/leave.service';
 export class LeaveRequestComponent implements OnInit {
 
   lstLeave: LeaveModel[] = [];
-  constructor(private leaveService: LeaveService) {
+  constructor(
+    private leaveService: LeaveService,
+    private empService: EmployeeService,
+    private deptService: DepartmentService
+  ) {
 
   }
   ngOnInit(): void {
@@ -30,9 +36,25 @@ export class LeaveRequestComponent implements OnInit {
         let employeeId = localStorage.getItem('employeeId');
         let role = localStorage.getItem('role');
         if (role === 'manager') {
-          this.lstLeave = this.lstLeave.filter(x => x.reportingPerson === employeeId);
+          this.lstLeave = this.lstLeave.filter(x => x.reportingPersonId === employeeId);
         }
         console.log(this.lstLeave);
+        this.lstLeave.forEach(element => {
+          this.empService.getById(element.employeeId)
+            .subscribe(empResponse => {
+              element.employeeName = empResponse.fullName;
+              element.emailId = empResponse.emailAddress;
+            });
+          this.empService.getById(element.reportingPersonId)
+            .subscribe(repResponse => {
+              element.reportingPerson = repResponse.fullName;
+            });
+          this.deptService.getById(element.departmentId)
+            .subscribe(deptResponse => {
+              element.department = deptResponse.name;
+            });
+        });
+
       })
   }
   approveLeaveRequest(leaveModel: LeaveModel) {
