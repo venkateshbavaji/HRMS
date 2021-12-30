@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { DepartmentModel } from '../department/department.model';
 import { DepartmentService } from '../department/department.service';
 import { EmployeeModel } from './employee.model';
 import { EmployeeService } from './employee.service';
@@ -11,12 +12,25 @@ import { EmployeeService } from './employee.service';
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent implements OnInit {
-
+  lstRole = [{ value: 'employee', text: 'Employee' }, { text: 'Manager', value: 'manager' }, { text: 'HR-Admin', value: 'hr-admin' }];
   lstEmployee: EmployeeModel[] = [];
+  lstDepartment: DepartmentModel[] = [];
+  lstAdminRole: EmployeeModel[] = [];
   employeeModel = new EmployeeModel();
   title: string = "Add Employee";
   alertMessage: string = '';
-
+  selectedReportingPerson = this.lstAdminRole[0];
+  selectedRole = this.lstRole[0];
+  selectedDepartment = this.lstDepartment[0];
+  onRoleChange(role: any) {
+    this.selectedRole = role;
+  }
+  onDepartmentChange(department: any) {
+    this.selectedDepartment = department;
+  }
+  onReportingPersonChange(reportingPerson: EmployeeModel) {
+    this.selectedReportingPerson = reportingPerson;
+  }
   employeeForm = new FormGroup({
     departmentId: new FormControl('', Validators.required),
     emailAddress: new FormControl('', Validators.required),
@@ -52,7 +66,11 @@ export class EmployeeComponent implements OnInit {
     return this.employeeForm.get('role');
   }
 
-  constructor(private employeeService: EmployeeService, private toasterService: ToastrService, private deptService: DepartmentService) {
+  constructor(
+    private employeeService: EmployeeService,
+    private toasterService: ToastrService,
+    private deptService: DepartmentService
+  ) {
 
   }
   ngOnInit(): void {
@@ -67,6 +85,12 @@ export class EmployeeComponent implements OnInit {
             ...data.payload.doc.data() as EmployeeModel
           }
         });
+        this.lstAdminRole = this.lstEmployee.filter(x => x.role != 'employee');
+        let role = localStorage.getItem('role');
+        let employeeId = localStorage.getItem('employeeId');
+        if (role === 'manager') {
+          this.lstEmployee = this.lstEmployee.filter(x => x.reportingPersonId == employeeId);
+        }
         this.lstEmployee.forEach(element => {
           if (element.departmentId) {
             this.deptService.getById(element.departmentId)
@@ -80,7 +104,15 @@ export class EmployeeComponent implements OnInit {
           }
         });
       })
-
+    this.deptService.getAll()
+      .subscribe(response => {
+        this.lstDepartment = response.map((data) => {
+          return {
+            id: data.payload.doc.id,
+            ...data.payload.doc.data() as DepartmentModel
+          }
+        });
+      })
   }
   addEmployee() {
     this.title = "Add Employee";
@@ -89,6 +121,9 @@ export class EmployeeComponent implements OnInit {
   editEmployee(employeeModel: EmployeeModel) {
     this.title = "Edit Employee";
     this.employeeModel = employeeModel;
+    this.selectedReportingPerson.employeeId = employeeModel.reportingPersonId;
+    this.selectedRole.value = employeeModel.role;
+    this.selectedDepartment.id = employeeModel.departmentId;
   }
   deleteEmployee(departmentId: string) {
     if (confirm('Are you sure you want to delete')) {
@@ -106,8 +141,11 @@ export class EmployeeComponent implements OnInit {
     }
   }
   saveEmployee() {
-    if (this.employeeModel.departmentId) {
-      this.employeeService.update(this.employeeModel.departmentId, this.employeeModel)
+    if (this.employeeModel.employeeId) {
+      this.employeeModel.reportingPersonId = this.selectedReportingPerson.employeeId;
+      this.employeeModel.role = this.selectedRole.value;
+      this.employeeModel.departmentId = this.selectedDepartment.id;
+      this.employeeService.update(this.employeeModel.employeeId, this.employeeModel)
         .then(response => {
           console.log(response);
           this.toasterService.success("Update successfully....");
@@ -118,9 +156,9 @@ export class EmployeeComponent implements OnInit {
         })
     }
     else {
-      // this.leaveModel.reportingPersonId = localStorage.getItem('reportingPersonId');
-      // this.leaveModel.status = 'Pending';
-      // this.leaveModel.userId = localStorage.getItem('userId');
+      this.employeeModel.reportingPersonId = this.selectedReportingPerson.employeeId;
+      this.employeeModel.role = this.selectedRole.value;
+      this.employeeModel.departmentId = this.selectedDepartment.id;
       this.employeeService.create(this.employeeModel)
         .then(response => {
           console.log(response);

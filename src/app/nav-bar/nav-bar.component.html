@@ -14,20 +14,16 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-
-                        <a class="nav-link" routerLink='/home' routerLinkActive='active'>Home</a>
-                    </li>
-                    <li class="nav-item">
+                    <li *ngIf="Role!='employee' && Role!='manager'" class="nav-item">
                         <a class="nav-link" routerLink='/department' routerLinkActive='active'>Department</a>
                     </li>
-                    <li class="nav-item">
+                    <li *ngIf="Role!='employee'" class="nav-item">
                         <a class="nav-link" routerLink='/employee' routerLinkActive='active'>Employee</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" routerLink='/leave' routerLinkActive='active'>My Leave</a>
+                    <li *ngIf="Role!='super-admin'" class="nav-item">
+                        <a class="nav-link" routerLink='/leave' routerLinkActive='active'>My Leaves</a>
                     </li>
-                    <li class="nav-item">
+                    <li *ngIf="Role!='employee'" class="nav-item">
                         <a class="nav-link" routerLink='/leave-request' routerLinkActive='active'>Leave-request</a>
                     </li>
                 </ul>

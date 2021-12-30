@@ -77,29 +77,39 @@
                         </div>
                         <div class="form-group">
                             <label for="txtPassword" class="col-form-label"> Password:</label>
-                            <input [(ngModel)]="employeeModel.password" formControlName="password" name="txtPassword"
-                                class="form-control" id="txtPassword">
+                            <input [(ngModel)]="employeeModel.password" type="password" formControlName="password"
+                                name="txtPassword" class="form-control" id="txtPassword">
                             <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
                                 * Password required
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="txtRole" class="col-form-label">Role:</label>
-                            <select>
-                                <option>Employee</option>
-                                <option>Manager</option>
-                                <option>Hr-admin</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="txtReportingPerson" class="col-form-label">ReportingPerson:</label>
-                            <select>
-                                <option>Employee</option>
-                                <option>Manager</option>
-                                <option>Hr-admin</option>
-                            </select>
-                        </div>
                     </form>
+                    <div class="form-group">
+                        <label for="drpDepartment" class="col-form-label">Department:</label>
+                        <select id="drpDepartment" class="form-control" [(ngModel)]="selectedDepartment"
+                            (ngModelChange)="onDepartmentChange($event)">
+                            <option *ngFor="let dept of lstDepartment" [ngValue]="dept">
+                                {{dept.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtRole" class="col-form-label">Role:</label>
+                        <select class="form-control" [ngModel]="selectedRole" (ngModelChange)="onRoleChange($event)">
+                            <option *ngFor="let role of lstRole" [ngValue]="role">{{role.text}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtReportingPerson" class="col-form-label">ReportingPerson:</label>
+                        <select class="form-control" [(ngModel)]="selectedReportingPerson"
+                            (ngModelChange)="onReportingPersonChange($event)">
+                            <option *ngFor="let emp of lstAdminRole" [ngValue]="emp">
+                                {{emp.fullName}}
+                            </option>
+                        </select>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

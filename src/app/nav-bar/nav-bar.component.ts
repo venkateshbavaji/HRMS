@@ -8,36 +8,23 @@ import { EmployeeService } from '../employee/employee.service';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent {
 
   IsLoggedIn: boolean = false;
-  //employeeModel = new EmployeeModel();
-
-
+  Role: string;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private employeeService: EmployeeService) {
     let employeeId = localStorage.getItem('employeeId');
+    this.Role = localStorage.getItem('role');
     if (employeeId) {
       this.IsLoggedIn = true;
       this.router.navigate(['/home']);
     }
   }
-
-
-  ngOnInit(): void {
-    /*   let departmentId = this.activatedRoute.snapshot.paramMap.get('departmentId');
-      this.employeeService.getById(departmentId)
-        .subscribe(response => {
-          this.employeeModel = response;
-          console.log(this.employeeModel.fullName);
-        }) */
-  }
-
   logout() {
     localStorage.clear();
     this.router.navigate(['/login']).then(() => {
       window.location.reload();
     });
   }
-
 }

@@ -48,6 +48,7 @@ export class LoginComponent {
           localStorage.setItem('emailAddress', filterEmployee[0].emailAddress);
           localStorage.setItem('fullName', filterEmployee[0].fullName);
           localStorage.setItem('role', filterEmployee[0].role);
+          localStorage.setItem('departmentId', filterEmployee[0].departmentId);
           localStorage.setItem('reportingPersonId', filterEmployee[0].reportingPersonId);
 
           this.router.navigate(['./home']).then(() => {
