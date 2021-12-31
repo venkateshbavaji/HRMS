@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DepartmentService } from '../department/department.service';
 import { EmployeeModel } from '../employee/employee.model';
 import { EmployeeService } from '../employee/employee.service';
 
@@ -9,7 +10,7 @@ import { EmployeeService } from '../employee/employee.service';
 })
 export class ProfileComponent implements OnInit {
   employee = new EmployeeModel();
-  constructor(private empService: EmployeeService) {
+  constructor(private empService: EmployeeService, private deptService: DepartmentService) {
 
   }
 
@@ -20,6 +21,10 @@ export class ProfileComponent implements OnInit {
       .subscribe(
         (response) => {
           this.employee = response
+          this.deptService.getById(response.departmentId)
+            .subscribe(deptResponse => this.employee.department = deptResponse.name);
+          this.empService.getById(response.reportingPersonId)
+            .subscribe(empResponse => this.employee.reportingPerson = empResponse.fullName);
           console.log(response);
         });
   }

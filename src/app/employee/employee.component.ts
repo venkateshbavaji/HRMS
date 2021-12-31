@@ -121,9 +121,9 @@ export class EmployeeComponent implements OnInit {
   editEmployee(employeeModel: EmployeeModel) {
     this.title = "Edit Employee";
     this.employeeModel = employeeModel;
-    this.selectedReportingPerson.employeeId = employeeModel.reportingPersonId;
-    this.selectedRole.value = employeeModel.role;
-    this.selectedDepartment.id = employeeModel.departmentId;
+    this.selectedReportingPerson = this.lstEmployee.filter(x => x.employeeId == employeeModel.reportingPersonId)[0];
+    this.selectedRole = this.lstRole.filter(x => x.value === employeeModel.role)[0];
+    this.selectedDepartment = this.lstDepartment.filter(x => x.id === employeeModel.departmentId)[0];
   }
   deleteEmployee(departmentId: string) {
     if (confirm('Are you sure you want to delete')) {
