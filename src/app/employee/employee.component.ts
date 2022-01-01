@@ -18,6 +18,7 @@ export class EmployeeComponent implements OnInit {
   lstAdminRole: EmployeeModel[] = [];
   employeeModel = new EmployeeModel();
   title: string = "Add Employee";
+  currentPage: number = 1;
   alertMessage: string = '';
   selectedReportingPerson = this.lstAdminRole[0];
   selectedRole = this.lstRole[0];

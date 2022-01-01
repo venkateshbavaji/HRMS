@@ -1,7 +1,7 @@
 <div class="card componentStyle">
     <div style="text-align: right;margin-bottom: 5px;">
         <a data-bs-toggle="modal" (click)="addLeave()" data-bs-target="#mpLeave" class="btn btn-primary">
-            <i class="fas fa-plus"></i>Apply Leave
+            <i class="fas fa-plus"></i>&nbsp; Apply Leave
         </a>
     </div>
     <table class="table">
@@ -17,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let leave of lstLeave">
+            <tr *ngFor="let leave of lstLeave | paginate: { itemsPerPage: 5, currentPage: currentPage}">
                 <td>{{leave.reason}}</td>
                 <td>{{leave.fromDate}}</td>
                 <td>{{leave.toDate}}</td>
@@ -28,6 +28,11 @@
                     <a [routerLink]="['/leave',leave.leaveId]" class="btn btn-info"><i class="fas fa-eye"></i></a>
                 </td>
 
+            </tr>
+            <tr>
+                <td colspan="6" style="text-align: center;">
+                    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+                </td>
             </tr>
         </tbody>
     </table>

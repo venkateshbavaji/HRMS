@@ -13,7 +13,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let leave of lstLeave">
+            <tr *ngFor="let leave of lstLeave  |paginate: { itemsPerPage: 5, currentPage: currentPage}">
 
                 <td>{{leave.emailId}}</td>
                 <td>{{leave.department}}</td>
@@ -30,6 +30,11 @@
                     &nbsp;
                     <a (click)="rejectLeaveRequest(leave)" class="btn btn-danger"><i
                             class="far fa-times-circle"></i></a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="8" style="text-align: center;">
+                    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
                 </td>
             </tr>
         </tbody>

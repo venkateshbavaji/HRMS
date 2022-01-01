@@ -13,6 +13,7 @@ import { LeaveService } from '../leave/leave.service';
 export class LeaveRequestComponent implements OnInit {
 
   lstLeave: LeaveModel[] = [];
+  currentPage: number = 1;
   constructor(
     private leaveService: LeaveService,
     private empService: EmployeeService,

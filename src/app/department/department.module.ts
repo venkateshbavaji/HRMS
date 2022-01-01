@@ -5,6 +5,7 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Route, RouterModule } from "@angular/router";
+import { NgxPaginationModule } from "ngx-pagination";
 import { environment } from "src/environments/environment";
 import { DepartmentDetailsComponent } from "./department-details.component";
 import { DepartmentComponent } from "./department.component";
@@ -27,6 +28,7 @@ const routes: Route[] = [
         FormsModule,
         CommonModule,
         ReactiveFormsModule,
+        NgxPaginationModule,
         RouterModule.forChild(routes),
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireDatabaseModule
