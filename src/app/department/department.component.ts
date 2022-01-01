@@ -15,6 +15,7 @@ export class DepartmentComponent implements OnInit {
   departmentModel = new DepartmentModel();
   title: string = "Add Department";
   alertMessage: string = '';
+  currentPage: number = 1;
 
   deptForm = new FormGroup({
     name: new FormControl('', Validators.required),

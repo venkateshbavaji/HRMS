@@ -12,6 +12,7 @@ export class LeaveComponent implements OnInit {
   lstLeave: LeaveModel[] = [];
   leaveModel = new LeaveModel();
   title = "Add Leave";
+  currentPage: number = 1;
   leaveForm = new FormGroup({
     leaveId: new FormControl('', Validators.required),
     department: new FormControl('', Validators.required),

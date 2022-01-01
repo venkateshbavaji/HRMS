@@ -1,21 +1,19 @@
 <div class="card componentStyle">
     <div style="text-align: right;margin-bottom: 5px;">
         <a data-bs-toggle="modal" (click)="addDepartment()" data-bs-target="#mpDepartment" class="btn btn-primary">
-            <i class="fas fa-plus"></i>ADD
+            <i class="fas fa-plus"></i>&nbsp; ADD
         </a>
     </div>
     <table class="table">
         <thead class="table-dark">
             <tr>
-                <th>#Id</th>
                 <th> Name</th>
                 <th>Description</th>
                 <th>Action(s)</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let department of lstDepartment">
-                <td>{{department.id}}</td>
+            <tr *ngFor="let department of lstDepartment |paginate: { itemsPerPage: 5, currentPage: currentPage}">
                 <td>{{department.name}}</td>
                 <td>{{department. description}}</td>
                 <td>
@@ -24,6 +22,11 @@
                     <a (click)="editDepartment(department)" data-bs-toggle="modal" data-bs-target="#mpDepartment"
                         class="btn btn-secondary"><i class="fas fa-pen-square"></i></a>&nbsp;
                     <a (click)="deleteDepartment(department.id)" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" style="text-align: center;">
+                    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
                 </td>
             </tr>
         </tbody>
