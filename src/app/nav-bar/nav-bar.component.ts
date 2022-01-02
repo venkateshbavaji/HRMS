@@ -21,10 +21,14 @@ export class NavBarComponent {
       this.router.navigate(['/home']);
     }
   }
+
   logout() {
-    localStorage.clear();
-    this.router.navigate(['/login']).then(() => {
-      window.location.reload();
-    });
+    if (confirm("Are u sure to logout ?")) {
+      localStorage.clear();
+      this.router.navigate(['/login']).then(() => {
+        window.location.reload();
+
+      });
+    }
   }
 }
