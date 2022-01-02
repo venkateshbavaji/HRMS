@@ -1,6 +1,8 @@
 <fieldset class="box">
     <form [formGroup]="loginForm" style="margin: 1rem;" #form="ngForm">
-        <h2 class="display-4">Login</h2>
+        <div class="bg-primary">
+            <h2 class="display-5">Login</h2>
+        </div>
         <div class="form-group">
             <label for="txtUserName">Email id :</label>
             <input [(ngModel)]="loginEmail" name="txtUserName" formControlName="userName" id="txtUserName" type="text"

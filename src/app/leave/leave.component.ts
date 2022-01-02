@@ -13,6 +13,7 @@ export class LeaveComponent implements OnInit {
   leaveModel = new LeaveModel();
   title = "Add Leave";
   currentPage: number = 1;
+  remainleaves: number;
   leaveForm = new FormGroup({
     leaveId: new FormControl('', Validators.required),
     department: new FormControl('', Validators.required),
@@ -93,12 +94,14 @@ export class LeaveComponent implements OnInit {
         });
         let employeeId = localStorage.getItem('employeeId');
         this.lstLeave = this.lstLeave.filter(x => x.employeeId === employeeId);
+        this.remainleaves = 24 - this.lstLeave.length;
         console.log(this.lstLeave);
       })
   }
   addLeave() {
     this.title = "Add Leave";
     this.leaveModel = new LeaveModel();
+    this.leaveForm.reset();
   }
 
   days() {
@@ -121,7 +124,7 @@ export class LeaveComponent implements OnInit {
     this.leaveService.create(this.leaveModel)
       .then(response => {
         console.log(response);
-        this.toasterService.success("Created successfully....")
+        this.toasterService.success("Leave Created successfully....")
       })
       .catch((error: Response) => {
         console.log(error);

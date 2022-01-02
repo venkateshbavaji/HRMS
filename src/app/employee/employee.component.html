@@ -47,47 +47,65 @@
                 </div>
                 <div class="modal-body">
                     <form [formGroup]="employeeForm">
-                        <div class="form-group">
-                            <label for="txtemailAddress" class="col-form-label">EmailAddress:</label>
-                            <input [(ngModel)]="employeeModel.emailAddress" formControlName="emailAddress"
-                                name="txtemailAddress" class="form-control" id="txtemailAddress">
-                            <div class="alert alert-danger" *ngIf="emailAddress.touched && emailAddress.invalid">
-                                * Email Address required
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="txtFirstName" class="col-form-label">FirstName:</label>
-                            <input [(ngModel)]="employeeModel.firstName" formControlName="firstName"
-                                class="form-control">
-                            <div class="alert alert-danger" *ngIf="firstName.touched && firstName.invalid">
-                                * First Name required
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="txtLastName" class="col-form-label">LastName:</label>
-                            <input [(ngModel)]="employeeModel.lastName" name="txtLastName" class="form-control"
-                                id="txtLastName" formControlName="lastName">
-                            <div class="alert alert-danger" *ngIf="lastName.touched && lastName.invalid">
-                                * last Name required
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="txtFullName" class="col-form-label">Full Name:</label>
-                            <input [(ngModel)]="employeeModel.fullName" formControlName="fullName" class="form-control"
-                                id="txtFullName">
-                            <div class="alert alert-danger" *ngIf="fullName.touched && fullName.invalid">
-                                * full Name required
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="txtPassword" class="col-form-label"> Password:</label>
-                            <input [(ngModel)]="employeeModel.password" type="password" formControlName="password"
-                                name="txtPassword" class="form-control" id="txtPassword">
-                            <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
-                                * Password required
-                            </div>
-                        </div>
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="txtemailAddress" class="col-form-label">EmailAddress:</label>
+                                        <input [(ngModel)]="employeeModel.emailAddress" formControlName="emailAddress"
+                                            name="txtemailAddress" class="form-control" id="txtemailAddress">
+                                        <div class="alert alert-danger"
+                                            *ngIf="emailAddress.touched && emailAddress.invalid">
+                                            * Email Address required
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="txtFirstName" class="col-form-label">FirstName:</label>
+                                        <input [(ngModel)]="employeeModel.firstName" formControlName="firstName"
+                                            class="form-control">
+                                        <div class="alert alert-danger" *ngIf="firstName.touched && firstName.invalid">
+                                            * First Name required
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="txtLastName" class="col-form-label">LastName:</label>
+                                        <input [(ngModel)]="employeeModel.lastName" name="txtLastName"
+                                            class="form-control" id="txtLastName" formControlName="lastName">
+                                        <div class="alert alert-danger" *ngIf="lastName.touched && lastName.invalid">
+                                            * last Name required
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="txtFullName" class="col-form-label">Full Name:</label>
+                                        <input [(ngModel)]="employeeModel.fullName" formControlName="fullName"
+                                            class="form-control" id="txtFullName">
+                                        <div class="alert alert-danger" *ngIf="fullName.touched && fullName.invalid">
+                                            * full Name required
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="txtPassword" class="col-form-label"> Password:</label>
+                                        <input [(ngModel)]="employeeModel.password" type="password"
+                                            formControlName="password" name="txtPassword" class="form-control"
+                                            id="txtPassword">
+                                        <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
+                                            * Password required
+                                        </div>
+                                    </div>
+                                </td>
+                        </table>
                     </form>
                     <div class="form-group">
                         <label for="drpDepartment" class="col-form-label">Department:</label>
@@ -114,9 +132,8 @@
                             </option>
                         </select>
                     </div>
-
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" style="margin-right: 30%;">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" (click)="saveEmployee()" class="btn btn-primary"
                         data-bs-dismiss="modal">Save</button>

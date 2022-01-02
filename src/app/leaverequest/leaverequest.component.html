@@ -25,10 +25,10 @@
                 <td>
                     <a [routerLink]="['/leave',leave.leaveId]" class="btn btn-info"><i class="fas fa-eye"></i></a>
                     &nbsp;
-                    <a (click)="approveLeaveRequest(leave)" class="btn btn-success"><i
+                    <a (click)="approveLeaveRequest(leave)" *ngIf="leave.status!='Approved'" class="btn btn-success"><i
                             class="far fa-check-circle"></i></a>
                     &nbsp;
-                    <a (click)="rejectLeaveRequest(leave)" class="btn btn-danger"><i
+                    <a (click)="rejectLeaveRequest(leave)" *ngIf="leave.status!='Approved'" class="btn btn-danger"><i
                             class="far fa-times-circle"></i></a>
                 </td>
             </tr>

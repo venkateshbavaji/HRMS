@@ -47,6 +47,7 @@ export class DepartmentComponent implements OnInit {
   addDepartment() {
     this.title = "Add Course";
     this.departmentModel = new DepartmentModel();
+    this.deptForm.reset();
   }
   editDepartment(departmentModel: DepartmentModel) {
     this.title = "Edit Department";
@@ -56,7 +57,7 @@ export class DepartmentComponent implements OnInit {
     if (confirm('Are you sure you want to delete')) {
       this.deptService.delete(id)
         .then(response => {
-          this.toasterService.success("Delete successfully...")
+          this.toasterService.success("Department Delete successfully...")
         })
         .catch((error: Response) => {
           this.toasterService.error(error.statusText);
@@ -68,7 +69,7 @@ export class DepartmentComponent implements OnInit {
     if (this.departmentModel.id) {
       this.deptService.update(this.departmentModel.id, this.departmentModel)
         .then(response => {
-          this.toasterService.success("Update successfully....");
+          this.toasterService.success("Department Update successfully....");
         })
         .catch((error: Response) => {
           this.toasterService.error(error.statusText);
@@ -81,7 +82,7 @@ export class DepartmentComponent implements OnInit {
       this.deptService.create(this.departmentModel)
         .then(response => {
           console.log(response);
-          this.toasterService.success("Created successfully....")
+          this.toasterService.success("Department Created successfully....")
         })
         .catch((error: Response) => {
           console.log(error);

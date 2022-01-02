@@ -118,6 +118,7 @@ export class EmployeeComponent implements OnInit {
   addEmployee() {
     this.title = "Add Employee";
     this.employeeModel = new EmployeeModel();
+    this.employeeForm.reset();
   }
   editEmployee(employeeModel: EmployeeModel) {
     this.title = "Edit Employee";
@@ -132,7 +133,7 @@ export class EmployeeComponent implements OnInit {
       this.employeeService.delete(departmentId)
         .then(response => {
           console.log(response);
-          this.toasterService.success("Delete successfully...")
+          this.toasterService.success("Employee Delete successfully...")
         })
         .catch((error: Response) => {
           console.log(error);
@@ -149,7 +150,7 @@ export class EmployeeComponent implements OnInit {
       this.employeeService.update(this.employeeModel.employeeId, this.employeeModel)
         .then(response => {
           console.log(response);
-          this.toasterService.success("Update successfully....");
+          this.toasterService.success("Employee Update successfully....");
         })
         .catch((error: Response) => {
           console.log(error);
@@ -163,7 +164,7 @@ export class EmployeeComponent implements OnInit {
       this.employeeService.create(this.employeeModel)
         .then(response => {
           console.log(response);
-          this.toasterService.success("Created successfully....")
+          this.toasterService.success(" Employee Created successfully....")
         })
         .catch((error: Response) => {
           console.log(error);

@@ -6,6 +6,7 @@
     box-shadow: 2px 2px 6px black;
     margin: auto;
     margin-bottom: auto; 
+   margin-top: 80px;
 }
 .form-group{
     margin-top: 10px;
@@ -14,6 +15,6 @@
 }
 h2{
     text-align: center;
-    background-color:blue;
+
     color:white;
 }
