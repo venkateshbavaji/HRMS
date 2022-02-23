@@ -41,7 +41,7 @@
                 <div class="modal-body">
                     <form [formGroup]="deptForm">
                         <div class="form-group">
-                            <label for="txtName" class="col-form-label">Name:</label>
+                            <label for="txtName" class="col-form-label">userName:</label>
                             <input [(ngModel)]="departmentModel.name" formControlName="name" name="txtDescription"
                                 class="form-control" id="txtName">
                             <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
